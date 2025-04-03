@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Book } from '../types/book';
-import { bookApi } from '../services/api';
+import { bookApi, ApiError } from '../services/api';
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { ErrorAlert } from './ErrorAlert';
 
 export default function BookList() {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     loadBooks();
@@ -17,8 +18,9 @@ export default function BookList() {
     try {
       const data = await bookApi.getAll();
       setBooks(data);
+      setError(null);
     } catch (err) {
-      setError('Failed to load books. Please try again later.');
+      setError(err instanceof Error ? err : new Error('Failed to load books'));
     } finally {
       setLoading(false);
     }
@@ -32,8 +34,9 @@ export default function BookList() {
     try {
       await bookApi.delete(id);
       setBooks(books.filter(book => book._id !== id));
+      setError(null);
     } catch (err) {
-      setError('Failed to delete book. Please try again later.');
+      setError(err instanceof Error ? err : new Error('Failed to delete book'));
     }
   };
 
@@ -41,12 +44,9 @@ export default function BookList() {
     return <div className="text-center">Loading...</div>;
   }
 
-  if (error) {
-    return <div className="text-center text-red-600">{error}</div>;
-  }
-
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <ErrorAlert error={error} onClose={() => setError(null)} />
       <div className="px-4 sm:px-0">
         <div className="flex flex-col">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
