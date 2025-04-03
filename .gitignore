@@ -28,3 +28,12 @@ build/
 .vscode/
 .idea/
 .DS_Store
+
+# Test build files and reports
+test-results/
+playwright-report/
+playwright/.cache/
+playwright/blob-report/
+playwright/test-results/
+coverage/
+.nyc_output/
