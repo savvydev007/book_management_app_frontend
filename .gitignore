@@ -1,0 +1,30 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+
+# Tailwind CSS
+*.css.map
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE/Editor
+.vscode/
+.idea/
+.DS_Store
