@@ -94,20 +94,60 @@ frontend/
 
 ## Testing
 
-The project includes comprehensive testing setup:
+The project includes a comprehensive testing setup with the following features:
 
-- **Unit Tests:** Using Vitest and React Testing Library
-- **End-to-End Tests:** Using Cypress
-- **Code Quality:** ESLint for code linting
+### Unit Tests
+- **Framework:** Vitest with React Testing Library
+- **Coverage:** Jest DOM matchers for DOM testing
+- **Mocking:** Built-in mocking capabilities for API calls and browser APIs
+- **Test Structure:** Organized by component with separate test files
 
-To run tests:
+### Test Files Organization
+```
+src/
+├── components/
+│   └── __tests__/           # Component-specific tests
+│       ├── BookList.test.tsx
+│       └── BookForm.test.tsx
+├── test/
+│   ├── setup.ts            # Global test setup
+│   └── utils.ts            # Test utilities and mocks
+└── vitest.config.ts        # Vitest configuration
+```
+
+### Running Tests
 ```bash
-# Run unit tests
+# Run all tests
 bun run test
 
-# Run E2E tests
-bun run test:e2e
+# Run tests with UI
+bun run test:ui
+
+# Run tests with coverage report
+bun run test:coverage
+
+# Run tests in watch mode
+bun run test --watch
 ```
+
+### Test Coverage
+The test suite covers:
+- Component rendering
+- User interactions
+- Form validation
+- API integration
+- Error handling
+- Loading states
+- Navigation
+- Data management
+
+### Testing Best Practices
+- Mock external dependencies (API calls, browser APIs)
+- Test both success and error scenarios
+- Validate form inputs and user interactions
+- Test component lifecycle and side effects
+- Use semantic queries for better maintainability
+- Follow the Arrange-Act-Assert pattern
 
 ## Contributing
 
